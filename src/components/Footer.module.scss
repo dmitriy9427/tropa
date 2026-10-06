@@ -1,0 +1,17 @@
+.footer {
+  display: grid;
+  gap: 8px;
+  padding: 40px var(--gutter) 48px;
+  border-top: 1px solid var(--line);
+  color: var(--ink-2);
+  font-size: 0.9rem;
+
+  a {
+    text-underline-offset: 3px;
+  }
+}
+
+.credits {
+  color: var(--muted);
+  font-size: 0.8rem;
+}

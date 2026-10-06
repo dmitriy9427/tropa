@@ -1,0 +1,4 @@
+.loading {
+  height: calc(100svh - var(--header-h));
+  background: linear-gradient(90deg, var(--paper) 0 min(460px, 100%), var(--paper-2) 0);
+}

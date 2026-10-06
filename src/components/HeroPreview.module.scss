@@ -1,0 +1,218 @@
+.wrap {
+  position: relative;
+  width: min(440px, 100%);
+  aspect-ratio: 0.92;
+}
+
+.map {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 86%;
+  aspect-ratio: 300 / 180;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 30px 30px,
+    linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 30px 30px,
+    var(--card);
+  box-shadow: var(--shadow-lift);
+  rotate: 3deg;
+  animation: float 7s ease-in-out infinite;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.river {
+  fill: none;
+  stroke: color-mix(in srgb, #3d8bd9 40%, transparent);
+  stroke-width: 14;
+  stroke-linecap: round;
+}
+
+.route {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: route 1.6s 0.8s var(--ease) forwards;
+}
+
+@keyframes route {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.pin {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  scale: 0;
+  animation: pop 0.5s var(--ease) forwards;
+  animation-delay: calc(0.7s + var(--i) * 0.5s);
+
+  circle {
+    fill: var(--accent);
+    stroke: var(--card);
+    stroke-width: 3;
+  }
+
+  text {
+    fill: var(--accent-ink);
+    font-size: 11px;
+    font-weight: 700;
+    text-anchor: middle;
+  }
+}
+
+@keyframes pop {
+  70% {
+    scale: 1.2;
+  }
+
+  to {
+    scale: 1;
+  }
+}
+
+.ticket {
+  position: absolute;
+  bottom: 4%;
+  left: 0;
+  width: 78%;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: var(--shadow-lift);
+  rotate: -2.5deg;
+  animation: float 7s -3.5s ease-in-out infinite;
+
+  // Цветная полоска дня слева, как у карточек в планировщике.
+  &::before {
+    content: '';
+    position: absolute;
+    top: 18px;
+    bottom: 18px;
+    left: 0;
+    width: 4px;
+    border-radius: 0 4px 4px 0;
+    background: var(--day-0);
+  }
+}
+
+@keyframes float {
+  50% {
+    translate: 0 -10px;
+  }
+}
+
+.ticketHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed var(--line-strong);
+
+  b {
+    display: block;
+    font-size: 1.1rem;
+  }
+}
+
+.dayLabel {
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.weather {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+}
+
+.stops {
+  display: grid;
+  gap: 10px;
+  padding: 14px 0;
+
+  li {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.95rem;
+    opacity: 0;
+    translate: -8px 0;
+    animation: in 0.5s var(--ease) forwards;
+    animation-delay: calc(0.9s + var(--i) * 0.5s);
+  }
+}
+
+@keyframes in {
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+.num {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--day-0);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.time {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.ticketFoot {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px dashed var(--line-strong);
+  color: var(--ink-2);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.stamp {
+  position: absolute;
+  top: 44%;
+  right: 2%;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  width: 92px;
+  height: 92px;
+  border: 2px dashed var(--trail);
+  border-radius: 50%;
+  color: var(--trail);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  rotate: -14deg;
+  opacity: 0.85;
+
+  span + span {
+    font-size: 0.6rem;
+    font-weight: 400;
+  }
+}

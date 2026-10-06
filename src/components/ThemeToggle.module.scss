@@ -1,0 +1,104 @@
+.toggle {
+  position: relative;
+  width: 64px;
+  height: 34px;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ffe2b8, #f6c48a);
+  transition: background 0.5s var(--ease), border-color 0.3s;
+
+  &[data-dark] {
+    background: linear-gradient(180deg, #1b2a4a, #0d1424);
+  }
+}
+
+.knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #fffaf0;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 25%);
+  translate: 0 0;
+
+  svg {
+    width: 22px;
+    height: 22px;
+    overflow: visible;
+  }
+
+  .toggle[data-dark] & {
+    translate: 30px 0;
+    background: #e9edf7;
+  }
+
+  .toggle[data-ready] & {
+    transition:
+      translate 0.55s var(--ease),
+      background-color 0.4s;
+  }
+}
+
+.core {
+  fill: #f2a33a;
+  transition: fill 0.4s;
+
+  .toggle[data-dark] & {
+    fill: #c9d1e6;
+  }
+}
+
+.rays {
+  stroke: #f2a33a;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  transform-origin: 12px 12px;
+  transition:
+    opacity 0.3s,
+    scale 0.45s var(--ease),
+    rotate 0.6s var(--ease);
+
+  .toggle[data-dark] & {
+    opacity: 0;
+    scale: 0.4;
+    rotate: 90deg;
+  }
+}
+
+// Тень, «откусывающая» солнце до месяца: выезжает из угла.
+.bite {
+  transition:
+    cx 0.55s var(--ease),
+    cy 0.55s var(--ease);
+
+  .toggle[data-dark] & {
+    cx: 15.5;
+    cy: 8.5;
+  }
+}
+
+.stars {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(1px 1px at 12px 9px, #fff 99%, transparent),
+    radial-gradient(1px 1px at 22px 22px, #fff 99%, transparent),
+    radial-gradient(1.5px 1.5px at 9px 20px, #fff 99%, transparent),
+    radial-gradient(1px 1px at 26px 12px, #fff 99%, transparent);
+  opacity: 0;
+  translate: 0 6px;
+  transition:
+    opacity 0.4s,
+    translate 0.6s var(--ease);
+
+  .toggle[data-dark] & {
+    opacity: 1;
+    translate: 0 0;
+  }
+}

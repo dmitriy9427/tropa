@@ -1,0 +1,107 @@
+.placeholder {
+  min-height: 140px;
+}
+
+.empty {
+  max-width: 460px;
+  color: var(--muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  position: relative;
+  animation: rise 0.6s var(--ease) both;
+  animation-delay: calc(var(--n) * 60ms);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    translate: 0 16px;
+  }
+}
+
+.link {
+  display: grid;
+  gap: 6px;
+  height: 100%;
+  padding: 20px 20px 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--card);
+  text-decoration: none;
+  box-shadow: var(--shadow);
+  transition:
+    translate 0.35s var(--ease),
+    box-shadow 0.35s var(--ease);
+
+  &:hover {
+    translate: 0 -4px;
+    box-shadow: var(--shadow-lift);
+  }
+}
+
+.city {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.title {
+  padding-right: 28px;
+  font-size: 1.15rem;
+  line-height: 1.2;
+}
+
+.meta {
+  color: var(--ink-2);
+  font-size: 0.9rem;
+}
+
+.dots {
+  display: flex;
+  gap: 4px;
+  margin-top: 8px;
+
+  i {
+    height: 4px;
+    border-radius: 2px;
+  }
+}
+
+.remove {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--muted);
+  opacity: 0;
+  transition: opacity 0.2s, background-color 0.2s;
+
+  .card:hover &,
+  &:focus-visible {
+    opacity: 1;
+  }
+
+  &:hover {
+    background: var(--paper-2);
+    color: var(--ink);
+  }
+
+  @media (hover: none) {
+    opacity: 1;
+  }
+}

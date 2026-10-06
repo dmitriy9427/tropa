@@ -1,0 +1,224 @@
+.board {
+  display: grid;
+  gap: 14px;
+  padding: 4px 16px 96px;
+}
+
+.list {
+  display: grid;
+  gap: 8px;
+  min-height: 8px;
+}
+
+// --- идеи ---------------------------------------------------------------------
+
+.ideas {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border: 1.5px dashed var(--line-strong);
+  border-radius: var(--radius);
+  transition: border-color 0.2s, background-color 0.2s;
+
+  &[data-over] {
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 5%, transparent);
+  }
+}
+
+.ideasHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+
+  h2 {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    font-size: 1rem;
+  }
+
+  .mono,
+  h2 span {
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+}
+
+.hint {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+// --- дни ----------------------------------------------------------------------
+
+.day {
+  position: relative;
+  display: grid;
+  gap: 10px;
+  padding: 14px 14px 14px 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: var(--shadow);
+  transition:
+    box-shadow 0.3s var(--ease),
+    border-color 0.3s;
+
+  // Цветная полоса дня — как линия маршрута этого дня на карте.
+  &::before {
+    content: '';
+    position: absolute;
+    top: 16px;
+    bottom: 16px;
+    left: 0;
+    width: 4px;
+    border-radius: 0 4px 4px 0;
+    background: var(--day);
+    transition: top 0.3s var(--ease), bottom 0.3s var(--ease);
+  }
+
+  &[data-active] {
+    border-color: var(--day);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--day) 18%, transparent), var(--shadow-lift);
+
+    &::before {
+      top: -1px;
+      bottom: -1px;
+      border-radius: var(--radius) 0 0 var(--radius);
+    }
+  }
+
+  &[data-over] {
+    border-color: var(--day);
+  }
+}
+
+.dayHead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 4px 10px;
+}
+
+.dayToggle {
+  display: grid;
+  justify-items: start;
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: left;
+
+  &:hover .dayDate {
+    color: var(--day);
+  }
+}
+
+.dayNum {
+  color: var(--day);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.dayDate {
+  font-size: 1.05rem;
+  transition: color 0.2s;
+
+  small {
+    color: var(--muted);
+    font-family: var(--font-body), sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+}
+
+.dayRemove {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--muted);
+  opacity: 0;
+  transition: opacity 0.2s, background-color 0.2s;
+
+  .day:hover &,
+  &:focus-visible {
+    opacity: 1;
+  }
+
+  &:hover {
+    background: var(--paper-2);
+    color: var(--ink);
+  }
+
+  @media (hover: none) {
+    opacity: 1;
+  }
+}
+
+.dayStats {
+  display: flex;
+  flex-wrap: wrap;
+  grid-column: 1 / -1;
+  gap: 4px 14px;
+  color: var(--ink-2);
+  font-size: 0.82rem;
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  svg {
+    color: var(--muted);
+  }
+}
+
+.weather {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px 3px 6px;
+  border-radius: 999px;
+  background: var(--paper);
+  font-size: 0.9rem;
+
+  span {
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+
+  // Дождь — подсвечиваем: может, стоит поменять дни местами.
+  &[data-bad] {
+    background: color-mix(in srgb, #3d8bd9 16%, var(--paper));
+  }
+}
+
+.weatherNone {
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.weatherSkeleton {
+  width: 72px;
+  height: 28px;
+  border-radius: 999px;
+  background: var(--paper-2);
+}
+
+.drop {
+  padding: 14px;
+  border: 1.5px dashed var(--line-strong);
+  border-radius: var(--radius-sm);
+  color: var(--muted);
+  font-size: 0.88rem;
+  text-align: center;
+}

@@ -1,0 +1,47 @@
+.header {
+  position: sticky;
+  z-index: 50;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: var(--header-h);
+  padding: 0 var(--gutter);
+  border-bottom: 1px solid transparent;
+  background: color-mix(in srgb, var(--paper) 78%, transparent);
+  backdrop-filter: blur(14px) saturate(1.4);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.15rem;
+  text-decoration: none;
+
+  svg {
+    transition: transform 0.5s var(--ease);
+  }
+
+  &:hover svg {
+    transform: rotate(-8deg) scale(1.06);
+  }
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 3vw, 28px);
+  font-weight: 500;
+
+  a {
+    text-decoration: none;
+    background: linear-gradient(currentcolor, currentcolor) 0 100% / 0 1.5px no-repeat;
+    transition: background-size 0.35s var(--ease);
+
+    &:hover {
+      background-size: 100% 1.5px;
+    }
+  }
+}

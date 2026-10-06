@@ -1,0 +1,112 @@
+.card {
+  position: relative;
+  padding: clamp(18px, 3vw, 28px);
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) + 6px);
+  background: color-mix(in srgb, var(--card) 88%, transparent);
+  box-shadow: var(--shadow-lift);
+  backdrop-filter: blur(10px);
+}
+
+.skeleton {
+  height: 246px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(100deg, var(--paper-2) 40%, var(--paper) 50%, var(--paper-2) 60%) 0 0 / 300% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -150% 0;
+  }
+}
+
+.form {
+  display: grid;
+  gap: 18px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+
+  > span {
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  input {
+    height: 48px;
+    padding: 0 14px;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-sm);
+    background: var(--paper);
+    font-weight: 500;
+
+    &:focus {
+      border-color: var(--accent);
+      outline: none;
+    }
+  }
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+
+  button {
+    width: 44px;
+    height: 100%;
+    border: 0;
+    background: none;
+    font-size: 1.3rem;
+
+    &:disabled {
+      opacity: 0.3;
+    }
+  }
+
+  output {
+    min-width: 76px;
+    font-weight: 600;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  svg {
+    transition: translate 0.3s var(--ease);
+  }
+
+  button:hover svg {
+    translate: 3px 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .row {
+    grid-template-columns: 1fr;
+  }
+
+  .actions > * {
+    flex: 1;
+  }
+}
