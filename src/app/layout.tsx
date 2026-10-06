@@ -3,6 +3,7 @@
 
 import type { Metadata, Viewport } from 'next'
 import { Golos_Text, JetBrains_Mono, Unbounded } from 'next/font/google'
+import { DialogHost } from '@/components/DialogHost'
 import { Header } from '@/components/Header'
 import { Providers } from '@/components/Providers'
 import { THEME_SCRIPT } from '@/lib/theme'
@@ -51,6 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Providers>
           <Header />
           {children}
+          <DialogHost />
         </Providers>
       </body>
     </html>

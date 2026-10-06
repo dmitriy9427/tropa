@@ -8,6 +8,7 @@ import { downloadICS } from '@/lib/ics'
 import { shareUrl } from '@/lib/share'
 import { dayPlaces, MAX_DAYS, tripRange } from '@/lib/trip'
 import type { Trip } from '@/lib/types'
+import { ask } from '@/store/dialog'
 import { toast } from '@/store/toast'
 import { useTrips } from '@/store/trips'
 import { Icon } from '../Icon'
@@ -38,7 +39,14 @@ export function TripHeader({ trip }: { trip: Trip }) {
       await navigator.clipboard.writeText(url)
       toast('Ссылка скопирована — отправь её попутчикам')
     } catch {
-      prompt('Скопируйте ссылку:', url)
+      // Буфер обмена недоступен (например, страница открыта не по https) — показываем ссылку в диалоге.
+      void ask({
+        title: 'Ссылка на поездку',
+        text: 'В ней вся поездка: откройте её на другом устройстве или отправьте попутчикам.',
+        confirmLabel: 'Скопировать',
+        cancelLabel: 'Закрыть',
+        copyValue: url,
+      })
     }
   }
 

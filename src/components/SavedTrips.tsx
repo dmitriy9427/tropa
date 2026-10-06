@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useShallow } from 'zustand/shallow'
 import { formatRange, plural } from '@/lib/dates'
 import { tripRange } from '@/lib/trip'
+import { ask } from '@/store/dialog'
 import { selectTripList, useTrips } from '@/store/trips'
 import { useHydrateTrips } from '@/store/useHydrateTrips'
 import styles from './SavedTrips.module.scss'
@@ -44,8 +45,14 @@ export function SavedTrips() {
               type="button"
               className={styles.remove}
               aria-label={`Удалить поездку «${trip.title}»`}
-              onClick={() => {
-                if (confirm(`Удалить поездку «${trip.title}»?`)) remove(trip.id)
+              onClick={async () => {
+                const ok = await ask({
+                  title: `Удалить «${trip.title}»?`,
+                  text: 'Поездка удалится из этого браузера. Если вы делились ссылкой, у получателей копия останется.',
+                  confirmLabel: 'Удалить',
+                  tone: 'danger',
+                })
+                if (ok) remove(trip.id)
               }}
             >
               <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
