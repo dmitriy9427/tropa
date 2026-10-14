@@ -193,8 +193,15 @@
 }
 
 @media (max-width: 960px) {
+  // minmax(0, 1fr), а не 1fr: иначе колонка не уже самого длинного слова
+  // («разложенная», nowrap) и на 320 px страница уезжала вбок.
   .hero {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  // Самое длинное слово заголовка должно влезть в строку на 320 px.
+  .title {
+    font-size: clamp(1.9rem, 9vw, 2.6rem);
   }
 
   .preview {
