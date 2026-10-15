@@ -68,7 +68,7 @@
 
 ## Как устроено
 
-Подробно — в [docs/](docs/README.md):
+Подробно — в [docs/](docs/README.md): [с чего начать](docs/00-start.md) · [разбор кода](docs/code/README.md) ·
 [архитектура](docs/01-architecture.md) ·
 [Next.js простым языком](docs/02-nextjs.md) ·
 [состояние и данные](docs/03-state-and-data.md) ·
